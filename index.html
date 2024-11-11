@@ -24,7 +24,36 @@
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <div data-view="entry-form">
+        <h2>New Entry</h2>
+        <div class="column-half">
+          <div class="row">
+            <!-- //////image -->
+            <label>
+              <img src="" />
+            </label>
+            <label>
+              Title:
+              <input type="text" id="entry-title" name="title" />
+            </label>
+            <label>
+              Photo URL:
+              <input type="url" id="photo-url" name="pic-url" />
+            </label>
+          </div>
+          <div class="column-full">
+            <div class="row">
+              <label>
+                Notes:
+                <input type="text" id="entry-notes" name="notes" />
+              </label>
+              <div class="journal-actions">
+                <button type="submit">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
