@@ -28,20 +28,27 @@
         <h2>New Entry</h2>
         <div class="row">
           <div class="column-half">
-            <!-- //////image -->
+            <label for="image">
+              <input
+                required
+                type="file"
+                id="file-image"
+                style="display: none"
+                accept="image/*" />
+            </label>
             <img
               src="images/placeholder-image-square.jpg"
-              id="image"
+              id="placeholder-image"
               alt="placeholder-image-square" />
           </div>
           <div class="column-half">
             <label for="title">
               Title
-              <input type="text" id="entry-title" name="title" />
+              <input required type="text" id="entry-title" name="title" />
             </label>
             <label for="url">
               Photo URL
-              <input type="url" id="photo-url" name="pic-url" />
+              <input required type="url" id="photo-url" name="pic-url" />
             </label>
           </div>
         </div>
@@ -49,7 +56,7 @@
           <div class="column-full">
             <label for="notes">
               Notes
-              <input type="text" id="entry-notes" name="notes" />
+              <input required type="text" id="entry-notes" name="notes" />
             </label>
             <div class="journal-actions">
               <button type="submit">SAVE</button>
