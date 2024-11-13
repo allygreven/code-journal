@@ -32,3 +32,9 @@
     width: 50%;
   }
 }
+
+@media screen and (width >= 576px) {
+  .container {
+    flex-basis: 50%;
+  }
+}
