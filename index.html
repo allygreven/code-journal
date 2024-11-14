@@ -27,45 +27,47 @@
       <div data-view="entry-form">
         <h2>New Entry</h2>
 
-        <div class="row">
-          <div class="column-half">
-            <label for="image">
-              <img
-                src="images/placeholder-image-square.jpg"
-                id="placeholder-image"
-                alt="placeholder-image-square" />
-            </label>
-          </div>
+        <form>
+          <div class="row">
+            <div class="column-half">
+              <label for="image">
+                <img
+                  src="images/placeholder-image-square.jpg"
+                  id="placeholder-image"
+                  alt="placeholder-image-square" />
+              </label>
+            </div>
 
-          <div class="column-half">
-            <label for="title">
-              Title
-              <input required type="text" id="entry-title" name="title" />
-            </label>
-            <label for="url">
-              Photo URL
-              <input required type="url" id="photo-url" name="pic-url" />
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="column-full">
-            <label for="notes">
-              Notes
-              <textarea
-                required
-                rows="7"
-                name="notes"
-                id="entry-notes"></textarea>
-              <!-- <input required type="text" id="entry-notes" name="notes" /> -->
-            </label>
-
-            <div class="journal-actions">
-              <button type="submit">SAVE</button>
+            <div class="column-half">
+              <label for="title">
+                Title
+                <input required type="text" id="entry-title" name="title" />
+              </label>
+              <label for="url">
+                Photo URL
+                <input required type="url" id="photo-url" name="url" />
+              </label>
             </div>
           </div>
-        </div>
+
+          <div class="row">
+            <div class="column-full">
+              <label for="notes">
+                Notes
+                <textarea
+                  required
+                  rows="7"
+                  name="notes"
+                  id="entry-notes"></textarea>
+                <!-- <input required type="text" id="entry-notes" name="notes" /> -->
+              </label>
+
+              <div class="journal-actions">
+                <button type="submit">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div data-view="entries" class="hidden"></div>
     </main>
