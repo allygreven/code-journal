@@ -49,3 +49,8 @@ img {
 .column-full label input[type='text'] {
   display: flex;
 }
+
+button:hover {
+  background-color: rgb(128, 52, 205);
+  cursor: pointer;
+}
