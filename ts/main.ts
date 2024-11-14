@@ -12,7 +12,6 @@ $photoInput.addEventListener('input', (event: Event) => {
   $photoPreview.src = newURL;
 });
 
-/// //////////////////////////////
 interface formElements extends HTMLFormControlsCollection {
   title: HTMLInputElement;
   url: HTMLInputElement;
