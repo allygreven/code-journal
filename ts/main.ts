@@ -69,10 +69,13 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   return $entry;
 }
 
-// document.addEventListener(DOMContentLoaded, () => {
-//   for (let i = 0; i < data.entries.length; i++) {
-//     const entry = data.entries[i];
-//     const $entryDOM = renderEntry(entry);
-//     $entry.appendChild($entryDOM);
-//   }
-// });
+const $ul = document.querySelector('ul');
+if (!$ul) throw new Error('$ul does not exist');
+
+document.addEventListener('DOMContentLoaded', () => {
+  for (let i = 0; i < data.entries.length; i++) {
+    const entry = data.entries[i];
+    const $entryDOM = renderEntry(entry);
+    $ul.appendChild($entryDOM);
+  }
+});
