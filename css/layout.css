@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+li {
+  display: flex;
+}
+
 @media screen and (width >= 768px) {
   .container {
     max-width: 900px;
@@ -36,5 +40,9 @@
 @media screen and (width >= 576px) {
   .container {
     flex-basis: 50%;
+  }
+
+  li {
+    flex-wrap: wrap;
   }
 }
