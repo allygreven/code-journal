@@ -53,7 +53,7 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   $columnHalf.className = 'column-half';
 
   const $image = document.createElement('img');
-  $image.setAttribute('src', 'entry.url');
+  $image.setAttribute('src', entry.url);
 
   const $headingTwo = document.createElement('h2');
   $headingTwo.textContent = entry.title;
