@@ -43,3 +43,36 @@ $entryForm.addEventListener('submit', (event: Event) => {
   $entryForm.reset();
   writeData();
 });
+
+/// ///////////////////////////////////////////
+function renderEntry(entry: FormEntry): HTMLLIElement {
+  const $entry = document.createElement('li');
+  $entry.className = 'list';
+
+  const $columnHalf = document.createElement('div');
+  $columnHalf.className = 'column-half';
+
+  const $image = document.createElement('img');
+  $image.setAttribute('src', 'entry.url');
+
+  const $headingTwo = document.createElement('h2');
+  $headingTwo.textContent = entry.title;
+
+  const $paragraph = document.createElement('p');
+  $paragraph.textContent = entry.notes;
+
+  $entry.appendChild($columnHalf);
+  $columnHalf.appendChild($image);
+  $columnHalf.appendChild($headingTwo);
+  $columnHalf.appendChild($paragraph);
+
+  return $entry;
+}
+
+// document.addEventListener(DOMContentLoaded, () => {
+//   for (let i = 0; i < data.entries.length; i++) {
+//     const entry = data.entries[i];
+//     const $entryDOM = renderEntry(entry);
+//     $entry.appendChild($entryDOM);
+//   }
+// });
