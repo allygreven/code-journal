@@ -95,3 +95,19 @@ function toggleNoEntries(): void {
     $pElement.className = 'noEntries';
   }
 }
+
+///////////is this right?!?!?//////////////////
+
+function viewSwap(entries: Data): void {
+  const viewName = data.view;
+  const $views = document.querySelectorAll('.entries');
+  if (!$views) throw new Error('$views query failed');
+  for (let i = 0; i < $views.length; i++) {
+    const $view = $views[i] as HTMLElement;
+    if ($view.dataset.view === viewName) {
+      $view.classList.remove('hidden');
+    } else {
+      $view.classList.add('hidden');
+    }
+  }
+}
