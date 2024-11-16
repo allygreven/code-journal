@@ -55,6 +55,9 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   const $image = document.createElement('img');
   $image.setAttribute('src', entry.url);
 
+  const $columnHalf2 = document.createElement('div');
+  $columnHalf2.className = 'column-half';
+
   const $headingTwo = document.createElement('h2');
   $headingTwo.textContent = entry.title;
 
@@ -62,9 +65,10 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   $paragraph.textContent = entry.notes;
 
   $entry.appendChild($columnHalf);
+  $entry.appendChild($columnHalf2);
   $columnHalf.appendChild($image);
-  $columnHalf.appendChild($headingTwo);
-  $columnHalf.appendChild($paragraph);
+  $columnHalf2.appendChild($headingTwo);
+  $columnHalf2.appendChild($paragraph);
 
   return $entry;
 }
