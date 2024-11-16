@@ -83,3 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
     $ul.appendChild($entryDOM);
   }
 });
+
+const $pElement = document.querySelector('.noEntries');
+if (!$pElement) throw new Error('$pElement query failed');
+
+function toggleNoEntries(): void {
+  if (!$pElement) throw new Error('$p query failed');
+  if (data.entries.length > 0) {
+    $pElement.className = 'noEntries hidden';
+  } else {
+    $pElement.className = 'noEntries';
+  }
+}
