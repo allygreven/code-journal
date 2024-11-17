@@ -105,9 +105,23 @@ function viewSwap(entries: Data): void {
   for (let i = 0; i < $views.length; i++) {
     const $view = $views[i] as HTMLElement;
     if ($view.dataset.view === viewName) {
-      $view.classList.remove('hidden');
+      $view.className = 'viewName';
     } else {
-      $view.classList.add('hidden');
+      $view.className = 'viewName hidden';
     }
   }
 }
+
+const $navbar = document.querySelector('.navbar') as HTMLElement;
+if (!$navbar) throw new Error('$navbar query failed');
+
+$navbar.addEventListener('click', (event: Event) => {
+  event.preventDefault();
+  const $target = event.target as HTMLElement;
+  if ($target.matches('.nav-link')) {
+    const viewName = $target.dataset.view;
+    if (viewName) {
+      viewSwap(viewName);
+    }
+  }
+});

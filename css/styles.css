@@ -1,5 +1,6 @@
 body {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #eee;
 }
 
@@ -62,4 +63,33 @@ button:hover {
 
 ul {
   list-style-type: none;
+}
+
+input:focus {
+  border-color: #4c2676;
+  outline: none;
+}
+
+textarea:focus {
+  border: 1.75px solid #4c2676;
+  outline: none;
+}
+
+#new-button {
+  background-color: #4c2676;
+  color: white;
+  border-radius: 15%;
+  width: 60px;
+  height: 35px;
+  margin: 2%;
+}
+
+#new-button:hover {
+  background-color: rgb(128, 52, 205);
+  cursor: pointer;
+}
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
 }
