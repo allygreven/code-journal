@@ -121,15 +121,22 @@ function viewSwap(viewName: string): void {
 const $anchor = document.querySelector('a');
 if (!$anchor) throw new Error('$anchor query failed');
 
-function handleClick(): void {
-  viewSwap('entries');
-}
-$anchor.addEventListener('click', handleClick);
+// function handleClick(): void {
+//   viewSwap('entries');
+// }
+// $anchor.addEventListener('click', handleClick);
 
-const $entryFormID = document.querySelector('#entry-form');
-if (!$entryFormID) throw new Error('$entryFormId query failed');
+// const $entryFormID = document.querySelector('#entry-form');
+// if (!$entryFormID) throw new Error('$entryFormId query failed');
 
-function handleClick2(): void {
-  viewSwap('entry-form');
+// function handleClick2(): void {
+//   viewSwap('entry-form');
+// }
+// $anchor.addEventListener('click', handleClick2);
+
+function handleClick(viewName: string): void {
+  viewSwap(viewName);
 }
-$anchor.addEventListener('click', handleClick2);
+$anchor.addEventListener('click', () => {
+  handleClick('entries');
+});
