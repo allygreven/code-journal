@@ -72,32 +72,39 @@ function toggleNoEntries() {
         $pElement.className = 'noEntries';
     }
 }
-///////////is this right?!?!?//////////////////
-function viewSwap(entries) {
-    const viewName = data.view;
-    const $views = document.querySelectorAll('.entries');
-    if (!$views)
-        throw new Error('$views query failed');
-    for (let i = 0; i < $views.length; i++) {
-        const $view = $views[i];
-        if ($view.dataset.view === viewName) {
-            $view.className = 'viewName';
-        }
-        else {
-            $view.className = 'viewName hidden';
-        }
+/// ////////is this right?!?!?//////////////////
+const $entries = document.querySelector('.entries');
+const $form = document.querySelector('.form');
+if (!$entries)
+    throw new Error('$entries query failed');
+if (!$form)
+    throw new Error('$form query failed');
+function viewSwap(viewName) {
+    if (!$entries)
+        throw new Error('$entries query failed');
+    if (!$form)
+        throw new Error('$form query failed');
+    if (viewName === 'entries') {
+        $entries.className = 'entries';
+        $form.className = 'form hidden';
     }
+    else {
+        $entries.className = 'entries hidden';
+        $form.className = 'form';
+    }
+    data.view = viewName;
 }
-const $navbar = document.querySelector('.navbar');
-if (!$navbar)
-    throw new Error('$navbar query failed');
-$navbar.addEventListener('click', (event) => {
-    event.preventDefault();
-    const $target = event.target;
-    if ($target.matches('.nav-link')) {
-        const viewName = $target.dataset.view;
-        if (viewName) {
-            viewSwap(viewName);
-        }
-    }
-});
+const $anchor = document.querySelector('#entries1');
+if (!$anchor)
+    throw new Error('$anchor query failed');
+function handleClick() {
+    viewSwap('entries');
+}
+$anchor.addEventListener('click', handleClick);
+const $entryFormID = document.querySelector('#entry-form');
+if (!$entryFormID)
+    throw new Error('$entryFormId query failed');
+function handleClick2() {
+    viewSwap('entry-form');
+}
+$anchor.addEventListener('click', handleClick2);

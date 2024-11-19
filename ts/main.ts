@@ -96,32 +96,40 @@ function toggleNoEntries(): void {
   }
 }
 
-///////////is this right?!?!?//////////////////
+/// ////////is this right?!?!?//////////////////
 
-function viewSwap(entries: Data): void {
-  const viewName = data.view;
-  const $views = document.querySelectorAll('.entries');
-  if (!$views) throw new Error('$views query failed');
-  for (let i = 0; i < $views.length; i++) {
-    const $view = $views[i] as HTMLElement;
-    if ($view.dataset.view === viewName) {
-      $view.className = 'viewName';
-    } else {
-      $view.className = 'viewName hidden';
-    }
+const $entries = document.querySelector('.entries');
+const $form = document.querySelector('.form');
+
+if (!$entries) throw new Error('$entries query failed');
+if (!$form) throw new Error('$form query failed');
+
+function viewSwap(viewName: string): void {
+  if (!$entries) throw new Error('$entries query failed');
+  if (!$form) throw new Error('$form query failed');
+
+  if (viewName === 'entries') {
+    $entries.className = 'entries';
+    $form.className = 'form hidden';
+  } else {
+    $entries.className = 'entries hidden';
+    $form.className = 'form';
   }
+  data.view = viewName;
 }
 
-const $navbar = document.querySelector('.navbar') as HTMLElement;
-if (!$navbar) throw new Error('$navbar query failed');
+const $anchor = document.querySelector('a');
+if (!$anchor) throw new Error('$anchor query failed');
 
-$navbar.addEventListener('click', (event: Event) => {
-  event.preventDefault();
-  const $target = event.target as HTMLElement;
-  if ($target.matches('.nav-link')) {
-    const viewName = $target.dataset.view;
-    if (viewName) {
-      viewSwap(viewName);
-    }
-  }
-});
+function handleClick(): void {
+  viewSwap('entries');
+}
+$anchor.addEventListener('click', handleClick);
+
+const $entryFormID = document.querySelector('#entry-form');
+if (!$entryFormID) throw new Error('$entryFormId query failed');
+
+function handleClick2(): void {
+  viewSwap('entry-form');
+}
+$anchor.addEventListener('click', handleClick2);
