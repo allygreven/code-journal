@@ -1,5 +1,6 @@
 body {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: #eee;
 }
 
@@ -58,4 +59,46 @@ img {
 button:hover {
   background-color: rgb(128, 52, 205);
   cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+}
+
+input:focus {
+  border-color: #4c2676;
+  outline: none;
+}
+
+textarea:focus {
+  border: 1.75px solid #4c2676;
+  outline: none;
+}
+
+#new-button {
+  background-color: #4c2676;
+  color: white;
+  border-radius: 15%;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+}
+
+.column-full-entries {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#new-button:hover {
+  background-color: rgb(128, 52, 205);
+  cursor: pointer;
+}
+
+a {
+  color: white;
+  font-size: 1.25rem;
+  text-decoration: none;
+  position: relative;
+  margin-top: 30px;
+  margin-left: 20px;
 }
