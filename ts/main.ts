@@ -8,8 +8,7 @@ if (!$photoPreview) throw new Error('$photoPreview does not exist');
 
 $photoInput.addEventListener('input', (event: Event) => {
   const input = event.target as HTMLInputElement;
-  const newURL = input.value;
-  $photoPreview.src = newURL;
+  $photoPreview.src = input.value;
 });
 
 interface formElements extends HTMLFormControlsCollection {
@@ -39,7 +38,14 @@ $entryForm.addEventListener('submit', (event: Event) => {
   };
   data.nextEntryId++;
   data.entries.unshift(formData);
+
   $photoPreview.src = 'images/placeholder-image-square.jpg';
+
+  const $newEntry = renderEntry(formData);
+  $ul.prepend($newEntry);
+  viewSwap('entries');
+  toggleNoEntries();
+
   $entryForm.reset();
   writeData();
 });
@@ -73,7 +79,7 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   return $entry;
 }
 
-const $ul = document.querySelector('ul');
+const $ul = document.querySelector('ul') as HTMLElement;
 if (!$ul) throw new Error('$ul does not exist');
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,12 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const $entryDOM = renderEntry(entry);
     $ul.appendChild($entryDOM);
   }
+  viewSwap(data.view);
+  toggleNoEntries();
 });
 
-const $pElement = document.querySelector('.noEntries');
+const $pElement = document.querySelector('.no-entries') as HTMLElement;
 if (!$pElement) throw new Error('$pElement query failed');
 
-function toggleNoEntries(): void {
+function toggleNoEntries(): any {
   if (!$pElement) throw new Error('$p query failed');
   if (data.entries.length > 0) {
     $pElement.className = 'noEntries hidden';
@@ -98,45 +106,38 @@ function toggleNoEntries(): void {
 
 /// ////////is this right?!?!?//////////////////
 
-const $entries = document.querySelector('.entries');
-const $form = document.querySelector('.form');
+const $entriesView = document.querySelector(
+  '[data-view="entries"]',
+) as HTMLElement;
+const $form = document.querySelector('[data-view="entry-form"]') as HTMLElement;
 
-if (!$entries) throw new Error('$entries query failed');
+if (!$entriesView) throw new Error('$entriesView query failed');
 if (!$form) throw new Error('$form query failed');
 
-function viewSwap(viewName: string): void {
-  if (!$entries) throw new Error('$entries query failed');
+function viewSwap(viewName: string): any {
+  data.view = viewName;
+  if (!$entriesView) throw new Error('$entriesView query failed');
   if (!$form) throw new Error('$form query failed');
 
   if (viewName === 'entries') {
-    $entries.className = 'entries';
+    $entriesView.className = 'entries';
     $form.className = 'form hidden';
   } else {
-    $entries.className = 'entries hidden';
+    $entriesView.className = 'entries hidden';
     $form.className = 'form';
   }
-  data.view = viewName;
 }
 
-const $anchor = document.querySelector('a');
-if (!$anchor) throw new Error('$anchor query failed');
+const $entriesLink = document.querySelector('.entries-link');
+if (!$entriesLink) throw new Error('$entriesLink query failed');
 
-// function handleClick(): void {
-//   viewSwap('entries');
-// }
-// $anchor.addEventListener('click', handleClick);
+const $newEntryButton = document.querySelector('.new-button');
+if (!$newEntryButton) throw new Error('$newEntryButton not found');
 
-// const $entryFormID = document.querySelector('#entry-form');
-// if (!$entryFormID) throw new Error('$entryFormId query failed');
+$newEntryButton.addEventListener('click', () => {
+  viewSwap('entry-form');
+});
 
-// function handleClick2(): void {
-//   viewSwap('entry-form');
-// }
-// $anchor.addEventListener('click', handleClick2);
-
-function handleClick(viewName: string): void {
-  viewSwap(viewName);
-}
-$anchor.addEventListener('click', () => {
-  handleClick('entries');
+$entriesLink.addEventListener('click', () => {
+  viewSwap('entries');
 });

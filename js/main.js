@@ -1,110 +1,99 @@
-"use strict";
+'use strict';
 const $photoInput = document.querySelector('#photo-url');
 const $photoPreview = document.querySelector('#placeholder-image');
-if (!$photoInput)
-    throw new Error('$photoInput does not exist');
-if (!$photoPreview)
-    throw new Error('$photoPreview does not exist');
+if (!$photoInput) throw new Error('$photoInput does not exist');
+if (!$photoPreview) throw new Error('$photoPreview does not exist');
 $photoInput.addEventListener('input', (event) => {
-    const input = event.target;
-    const newURL = input.value;
-    $photoPreview.src = newURL;
+  const input = event.target;
+  $photoPreview.src = input.value;
 });
 const $entryForm = document.querySelector('form');
-if (!$entryForm)
-    throw new Error('$entryForm does not exist');
+if (!$entryForm) throw new Error('$entryForm does not exist');
 $entryForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const $formElements = $entryForm.elements;
-    const formData = {
-        entryId: data.nextEntryId,
-        title: $formElements.title.value,
-        url: $formElements.url.value,
-        notes: $formElements.notes.value,
-    };
-    data.nextEntryId++;
-    data.entries.unshift(formData);
-    $photoPreview.src = 'images/placeholder-image-square.jpg';
-    $entryForm.reset();
-    writeData();
+  event.preventDefault();
+  const $formElements = $entryForm.elements;
+  const formData = {
+    entryId: data.nextEntryId,
+    title: $formElements.title.value,
+    url: $formElements.url.value,
+    notes: $formElements.notes.value,
+  };
+  data.nextEntryId++;
+  data.entries.unshift(formData);
+  $photoPreview.src = 'images/placeholder-image-square.jpg';
+  const $newEntry = renderEntry(formData);
+  $ul.prepend($newEntry);
+  viewSwap('entries');
+  toggleNoEntries();
+  $entryForm.reset();
+  writeData();
 });
 /// ///////////////////////////////////////////
 function renderEntry(entry) {
-    const $entry = document.createElement('li');
-    $entry.className = 'list';
-    const $columnHalf = document.createElement('div');
-    $columnHalf.className = 'column-half';
-    const $image = document.createElement('img');
-    $image.setAttribute('src', entry.url);
-    const $columnHalf2 = document.createElement('div');
-    $columnHalf2.className = 'column-half';
-    const $headingTwo = document.createElement('h2');
-    $headingTwo.textContent = entry.title;
-    const $paragraph = document.createElement('p');
-    $paragraph.textContent = entry.notes;
-    $entry.appendChild($columnHalf);
-    $entry.appendChild($columnHalf2);
-    $columnHalf.appendChild($image);
-    $columnHalf2.appendChild($headingTwo);
-    $columnHalf2.appendChild($paragraph);
-    return $entry;
+  const $entry = document.createElement('li');
+  $entry.className = 'list';
+  const $columnHalf = document.createElement('div');
+  $columnHalf.className = 'column-half';
+  const $image = document.createElement('img');
+  $image.setAttribute('src', entry.url);
+  const $columnHalf2 = document.createElement('div');
+  $columnHalf2.className = 'column-half';
+  const $headingTwo = document.createElement('h2');
+  $headingTwo.textContent = entry.title;
+  const $paragraph = document.createElement('p');
+  $paragraph.textContent = entry.notes;
+  $entry.appendChild($columnHalf);
+  $entry.appendChild($columnHalf2);
+  $columnHalf.appendChild($image);
+  $columnHalf2.appendChild($headingTwo);
+  $columnHalf2.appendChild($paragraph);
+  return $entry;
 }
 const $ul = document.querySelector('ul');
-if (!$ul)
-    throw new Error('$ul does not exist');
+if (!$ul) throw new Error('$ul does not exist');
 document.addEventListener('DOMContentLoaded', () => {
-    for (let i = 0; i < data.entries.length; i++) {
-        const entry = data.entries[i];
-        const $entryDOM = renderEntry(entry);
-        $ul.appendChild($entryDOM);
-    }
+  for (let i = 0; i < data.entries.length; i++) {
+    const entry = data.entries[i];
+    const $entryDOM = renderEntry(entry);
+    $ul.appendChild($entryDOM);
+  }
+  viewSwap(data.view);
+  toggleNoEntries();
 });
-const $pElement = document.querySelector('.noEntries');
-if (!$pElement)
-    throw new Error('$pElement query failed');
+const $pElement = document.querySelector('.no-entries');
+if (!$pElement) throw new Error('$pElement query failed');
 function toggleNoEntries() {
-    if (!$pElement)
-        throw new Error('$p query failed');
-    if (data.entries.length > 0) {
-        $pElement.className = 'noEntries hidden';
-    }
-    else {
-        $pElement.className = 'noEntries';
-    }
+  if (!$pElement) throw new Error('$p query failed');
+  if (data.entries.length > 0) {
+    $pElement.className = 'noEntries hidden';
+  } else {
+    $pElement.className = 'noEntries';
+  }
 }
 /// ////////is this right?!?!?//////////////////
-const $entries = document.querySelector('.entries');
-const $form = document.querySelector('.form');
-if (!$entries)
-    throw new Error('$entries query failed');
-if (!$form)
-    throw new Error('$form query failed');
+const $entriesView = document.querySelector('[data-view="entries"]');
+const $form = document.querySelector('[data-view="entry-form"]');
+if (!$entriesView) throw new Error('$entriesView query failed');
+if (!$form) throw new Error('$form query failed');
 function viewSwap(viewName) {
-    if (!$entries)
-        throw new Error('$entries query failed');
-    if (!$form)
-        throw new Error('$form query failed');
-    if (viewName === 'entries') {
-        $entries.className = 'entries';
-        $form.className = 'form hidden';
-    }
-    else {
-        $entries.className = 'entries hidden';
-        $form.className = 'form';
-    }
-    data.view = viewName;
+  data.view = viewName;
+  if (!$entriesView) throw new Error('$entriesView query failed');
+  if (!$form) throw new Error('$form query failed');
+  if (viewName === 'entries') {
+    $entriesView.className = 'entries';
+    $form.className = 'form hidden';
+  } else {
+    $entriesView.className = 'entries hidden';
+    $form.className = 'form';
+  }
 }
-const $anchor = document.querySelector('#entries1');
-if (!$anchor)
-    throw new Error('$anchor query failed');
-function handleClick() {
-    viewSwap('entries');
-}
-$anchor.addEventListener('click', handleClick);
-const $entryFormID = document.querySelector('#entry-form');
-if (!$entryFormID)
-    throw new Error('$entryFormId query failed');
-function handleClick2() {
-    viewSwap('entry-form');
-}
-$anchor.addEventListener('click', handleClick2);
+const $entriesLink = document.querySelector('.entries-link');
+if (!$entriesLink) throw new Error('$entriesLink query failed');
+const $newEntryButton = document.querySelector('.new-button');
+if (!$newEntryButton) throw new Error('$newEntryButton not found');
+$newEntryButton.addEventListener('click', () => {
+  viewSwap('entry-form');
+});
+$entriesLink.addEventListener('click', () => {
+  viewSwap('entries');
+});
