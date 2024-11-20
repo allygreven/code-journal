@@ -50,7 +50,6 @@ $entryForm.addEventListener('submit', (event: Event) => {
   writeData();
 });
 
-/// ///////////////////////////////////////////
 function renderEntry(entry: FormEntry): HTMLLIElement {
   const $entry = document.createElement('li');
   $entry.className = 'list';
@@ -103,8 +102,6 @@ function toggleNoEntries(): any {
     $pElement.className = 'noEntries';
   }
 }
-
-/// ////////is this right?!?!?//////////////////
 
 const $entriesView = document.querySelector(
   '[data-view="entries"]',
