@@ -143,3 +143,82 @@ $newEntryButton.addEventListener('click', () => {
 $entriesLink.addEventListener('click', () => {
   viewSwap('entries');
 });
+
+/// /////////////////////////////////////////////////////////////
+
+$ul.addEventListener('click', (event: Event) => {
+  const target = event.target as HTMLElement;
+  if (target.matches('.fa-pencil')) {
+    const $entry = target.closest('li') as HTMLElement;
+
+    const entryId = $entry.getAttribute('data-entry-id');
+
+    const entryToEdit = data.entries.find(
+      (entry) => entry.entryId.toString() === entryId,
+    );
+
+    if (!entryToEdit) return;
+    data.editing = entryToEdit;
+
+     const $formElements = $entryForm.elements as formElements;
+      $formElements.title.value = entryToEdit.title;
+      $formElements.url.value = entryToEdit.url;
+      $formElements.notes.value = entryToEdit.notes;
+
+      $photoPreview.src = entryToEdit.url;
+
+      const $formTitle = document.querySelector('#entry-form') as HTMLElement;
+      if (!$formTitle) throw new Error('$formTitle query failed')
+
+  //    if ($formTitle === .new-entry) {
+  //   $entriesView.className = 'entries';
+  //   $form.className = 'form hidden';
+  // } else {
+  //   $entriesView.className = 'entries hidden';
+  //   $form.className = 'form';
+  }
+  viewSwap('entry-form');
+}
+});
+
+
+
+
+
+  // if (viewName === 'entries') {
+  //   $entriesView.className = 'entries';
+  //   $form.className = 'form hidden';
+  // } else {
+  //   $entriesView.className = 'entries hidden';
+  //   $form.className = 'form';
+  // }
+
+
+
+/*
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+/
+
+
+//     // Pre-populate the form fields with the entry's values
+//
+
+//     // Update the photo preview
+//
+
+//     // Update the form title
+//
+
+//     // Show the form view
+//     viewSwap('entry-form');
+//   }
+// });

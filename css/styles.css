@@ -94,6 +94,11 @@ textarea:focus {
   cursor: pointer;
 }
 
+.column-full-entries h2:hover {
+  color: grey;
+  cursor: pointer;
+}
+
 a {
   color: white;
   font-size: 1.25rem;
