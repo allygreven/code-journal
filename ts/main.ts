@@ -53,6 +53,7 @@ $entryForm.addEventListener('submit', (event: Event) => {
 function renderEntry(entry: FormEntry): HTMLLIElement {
   const $entry = document.createElement('li');
   $entry.className = 'list';
+  $entry.setAttribute('data-entry-id', entry.entryId.toString());
 
   const $columnHalf = document.createElement('div');
   $columnHalf.className = 'column-half';
@@ -66,6 +67,9 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   const $headingTwo = document.createElement('h2');
   $headingTwo.textContent = entry.title;
 
+  const $pencil = document.createElement('i');
+  $pencil.className = 'fa-solid fa-pencil';
+
   const $paragraph = document.createElement('p');
   $paragraph.textContent = entry.notes;
 
@@ -74,6 +78,7 @@ function renderEntry(entry: FormEntry): HTMLLIElement {
   $columnHalf.appendChild($image);
   $columnHalf2.appendChild($headingTwo);
   $columnHalf2.appendChild($paragraph);
+  $headingTwo.appendChild($pencil);
 
   return $entry;
 }

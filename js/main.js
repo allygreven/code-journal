@@ -28,10 +28,10 @@ $entryForm.addEventListener('submit', (event) => {
   $entryForm.reset();
   writeData();
 });
-/// ///////////////////////////////////////////
 function renderEntry(entry) {
   const $entry = document.createElement('li');
   $entry.className = 'list';
+  $entry.setAttribute('data-entry-id', entry.entryId.toString());
   const $columnHalf = document.createElement('div');
   $columnHalf.className = 'column-half';
   const $image = document.createElement('img');
@@ -40,6 +40,8 @@ function renderEntry(entry) {
   $columnHalf2.className = 'column-half';
   const $headingTwo = document.createElement('h2');
   $headingTwo.textContent = entry.title;
+  const $pencil = document.createElement('i');
+  $pencil.className = 'fa-solid fa-pencil';
   const $paragraph = document.createElement('p');
   $paragraph.textContent = entry.notes;
   $entry.appendChild($columnHalf);
@@ -47,6 +49,7 @@ function renderEntry(entry) {
   $columnHalf.appendChild($image);
   $columnHalf2.appendChild($headingTwo);
   $columnHalf2.appendChild($paragraph);
+  $headingTwo.appendChild($pencil);
   return $entry;
 }
 const $ul = document.querySelector('ul');
@@ -70,7 +73,6 @@ function toggleNoEntries() {
     $pElement.className = 'noEntries';
   }
 }
-/// ////////is this right?!?!?//////////////////
 const $entriesView = document.querySelector('[data-view="entries"]');
 const $form = document.querySelector('[data-view="entry-form"]');
 if (!$entriesView) throw new Error('$entriesView query failed');
