@@ -99,3 +99,22 @@ $newEntryButton.addEventListener('click', () => {
 $entriesLink.addEventListener('click', () => {
   viewSwap('entries');
 });
+/// /////////////////////////////////////////////////////////////
+$ul.addEventListener('click', (event) => {
+  const $target = event.target;
+  if ($target.matches('.fa-pencil')) {
+    viewSwap('entry-form');
+    const $firstLi = $target.closest('li');
+    const $li = $firstLi.getAttribute('data-entry-id');
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number($li)) {
+        data.editing = data.entries[i];
+        $photoPreview.src = data.editing.url;
+        const $formElements = $entryForm.elements;
+        $formElements.title.value = data.editing.title;
+        $formElements.url.value = data.editing.url;
+        $formElements.notes.value = data.editing.notes;
+      }
+    }
+  }
+});
