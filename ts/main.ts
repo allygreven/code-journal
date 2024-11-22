@@ -36,18 +36,39 @@ $entryForm.addEventListener('submit', (event: Event) => {
     url: $formElements.url.value,
     notes: $formElements.notes.value,
   };
-  data.nextEntryId++;
-  data.entries.unshift(formData);
+  /// ///////////////////////////////////////////////////
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(formData);
+    writeData();
+    const $newEntry = renderEntry(formData);
+    $ul.prepend($newEntry);
+  } else {
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        formData.entryId = data.editing.entryId;
+        data.entries[i] = formData;
+        const $ogEntries = $ul.querySelector(
+          `li[data-entry-id="${data.editing.entryId}"]`,
+        );
+        const $editedEntry = renderEntry(formData);
+        if ($ogEntries) {
+          $ogEntries.replaceWith($editedEntry);
+        }
+        break;
+      }
+    }
+    $h2.textContent = 'New Entry';
+    data.editing = null;
+  }
+
+  /// ////////////////////////////////////////
 
   $photoPreview.src = 'images/placeholder-image-square.jpg';
 
-  const $newEntry = renderEntry(formData);
-  $ul.prepend($newEntry);
   viewSwap('entries');
   toggleNoEntries();
-
   $entryForm.reset();
-  writeData();
 });
 
 function renderEntry(entry: FormEntry): HTMLLIElement {
@@ -162,7 +183,12 @@ $ul.addEventListener('click', (event: Event) => {
         $formElements.title.value = data.editing.title;
         $formElements.url.value = data.editing.url;
         $formElements.notes.value = data.editing.notes;
+        $h2.textContent = 'Edit Entry';
       }
     }
   }
 });
+
+const $h2 = document.querySelector(
+  '[data-view="entry-form"] h2',
+) as HTMLElement;
